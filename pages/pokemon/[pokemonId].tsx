@@ -1,13 +1,15 @@
 import Image from "next/image";
 import  styles from "../../styles/Pokemon.module.css"
 
+import { useRouter } from "next/router";
+
 type Props = {
     pokemon: Pokemon
 }
 
 export const getStaticPaths = async() => {
 
-    const maxPokemons = 250;
+    const maxPokemons = 100;
     const api = 'https://pokeapi.co/api/v2/pokemon';
 
     const res = await fetch(`${api}/?limit=${maxPokemons}`);
@@ -21,7 +23,7 @@ export const getStaticPaths = async() => {
 
     return {
         paths,
-        fallback: false,
+        fallback: true,
     }
 }
 
@@ -38,6 +40,14 @@ export const getStaticProps = async(context: any) => {
 }
 
 export default function Pokemon({pokemon}: Props){
+
+    const router = useRouter();
+
+    if(router.isFallback) {
+        return <div className={styles.loading}><Image src="/images/pokeLoad.gif" width="200" height="200" alt="Loading"/><h3>Carregando...</h3></div>
+    }
+
+
     return (
         <div className={styles.container}>
             <h1>{pokemon.name}</h1>
