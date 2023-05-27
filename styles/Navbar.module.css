@@ -20,6 +20,12 @@
     color: #E33D33;
 }
 
+@media screen and (max-width: 300px) {
+    .logo h1{
+        display: none;
+    }
+}
+
 .logo a{
     display: flex;
     justify-content: center;

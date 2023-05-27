@@ -5,6 +5,12 @@
     margin-bottom: 2em;
 }
 
+@media screen and (max-width: 300px) {
+    .title_container img{
+        display: none;
+    }
+}
+
 .title{
     color: #E33D33;
     text-align: center;
